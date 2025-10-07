@@ -11,7 +11,7 @@ sensors = [
 ]
 
 # Lade die CSV-Datei
-df = pd.read_csv('data\energyData24Hourly.csv')
+df = pd.read_csv('data/energyData24Hourly.csv')
 
 # Konvertiere 'last_changed' zu datetime und stelle sicher, dass 'state' numerisch ist
 df['last_changed'] = pd.to_datetime(df['last_changed'])
