@@ -68,7 +68,7 @@ netznutzung = df_time['sensor.netznutzung_kwh']
 netzeinspeisung = df_time['sensor.netzeinspeisung_kwh']
 hausverbrauch = pv_sum - netzeinspeisung + netznutzung
 
-pv_sum = pv_ost + pv_west*6
+pv_sum = pv_ost + pv_west*1
 
 pv_uebrig = pv_sum - hausverbrauch
 
