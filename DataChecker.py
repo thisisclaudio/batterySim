@@ -187,29 +187,3 @@ eigenverbrauchsquote = (yearly_sums['pv_gesamt_kwh_erweitert'] - yearly_sums['se
 print(f"\nAutarkie-Grad: {autarkie_grad:.1f}%")
 print(f"Eigenverbrauchsquote: {eigenverbrauchsquote:.1f}%")
 
-# Detaillierter Plot für einen Sommermonat (z.B. Juli)
-plt.figure(figsize=(15, 8))
-start_summer = datetime(2024, 7, 1)
-end_summer = datetime(2024, 8, 1)
-mask_summer = (combined_df.index >= start_summer) & (combined_df.index < end_summer)
-df_july = combined_df.loc[mask_summer]
-
-plt.plot(df_july.index, df_july['sensor.netznutzung_kwh'], label='Netznutzung (kWh)', linewidth=1)
-plt.plot(df_july.index, df_july['sensor.netzeinspeisung_kwh'], label='Netzeinspeisung (kWh)', linewidth=1)
-plt.plot(df_july.index, df_july['pv_gesamt_kwh_erweitert'], label='PV Gesamt erweitert (kWh)', linewidth=1)
-plt.plot(df_july.index, df_july['hausverbrauch_kwh'], label='Hausverbrauch (kWh)', linewidth=1)
-plt.fill_between(df_july.index, 0, df_july['pv_uebrig_kwh'], 
-                 where=(df_july['pv_uebrig_kwh'] > 0), alpha=0.3, color='green', 
-                 label='PV Überschuss')
-plt.fill_between(df_july.index, 0, df_july['pv_uebrig_kwh'], 
-                 where=(df_july['pv_uebrig_kwh'] < 0), alpha=0.3, color='red', 
-                 label='PV Defizit')
-plt.xlabel('Datum')
-plt.ylabel('kWh')
-plt.title('Detaillierte Energieübersicht Juli 2024 (stündlich)')
-plt.legend()
-plt.grid(True, alpha=0.3)
-plt.gca().xaxis.set_major_formatter(mdates.DateFormatter('%m/%d'))
-plt.xticks(rotation=45)
-plt.tight_layout()
-plt.show()
